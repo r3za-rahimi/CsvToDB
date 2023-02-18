@@ -7,5 +7,5 @@ import java.sql.SQLException;
 public interface Repository {
 
 
-    public void add(Person p) throws SQLException;
+    public void add(Person p);
 }
