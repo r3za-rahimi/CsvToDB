@@ -8,4 +8,6 @@ public interface Repository {
 
 
     public void add(Person p);
+
+    public boolean findById(long id);
 }

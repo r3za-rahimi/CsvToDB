@@ -2,10 +2,7 @@ package Repository;
 
 import model.Person;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class PersonRepo implements Repository {
 
@@ -46,7 +43,7 @@ public class PersonRepo implements Repository {
             statement.setBoolean(11, p.isActiveMember());
             statement.setFloat(12, p.getEstimatedSalary());
             statement.setBoolean(13, p.isExited());
-            statement.setLong(14, p.getCreditScore());
+            statement.setLong(14, p.getCurrentLoanAmount());
 
 
             statement.executeUpdate();
@@ -56,5 +53,25 @@ public class PersonRepo implements Repository {
         }
 
 
+    }
+
+
+    @Override
+    public boolean findById(long id) {
+
+        try {
+            statement = connection.prepareStatement("select id from costumer where id=?");
+
+            statement.setLong(1,id);
+
+           ResultSet r = statement.executeQuery();
+           if (r.next()){
+               return false;
+           }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return true;
     }
 }
